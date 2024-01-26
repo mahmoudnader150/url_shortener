@@ -7,7 +7,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 const app = express();
-
+const appRoutes = require('./routes/appRoutes');
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -21,6 +21,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
+app.use('/api/ShortURL',appRoutes );
 
 module.exports = app;
