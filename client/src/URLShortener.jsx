@@ -5,17 +5,24 @@ const UrlShortener = () => {
   const [shortenedUrl, setShortenedUrl] = useState('');
 
   const handleShorten = async () => {
-    // Your URL shortening logic goes here
-    // You may use a URL shortening API or your own backend service
-
-    // For demonstration purposes, let's assume a simple mock function
-    const mockShortenUrl = (url) => {
-      // Replace this with your actual URL shortening logic
-      return 'http://short.url/abc123';
-    };
-
-    const shortUrl = await mockShortenUrl(originalUrl);
-    setShortenedUrl(shortUrl);
+    try {
+      const response = await fetch('http://localhost:8000/api/shortURL/shorten', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ originalUrl }),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setShortenedUrl(data.shortUrl); // Update this line
+      } else {
+        console.error('Failed to shorten URL');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -23,7 +30,9 @@ const UrlShortener = () => {
       <h1>URL Shortener</h1>
       <label>
         Original URL:
+        <br />
         <input
+          name='fullURL'
           type="text"
           value={originalUrl}
           onChange={(e) => setOriginalUrl(e.target.value)}

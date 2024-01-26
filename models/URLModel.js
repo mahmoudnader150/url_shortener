@@ -1,8 +1,7 @@
-// Importing necessary modules
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const shortId = require('shortid');
 
-// Creating the URLSchema
 const URLSchema = new Schema({
   originalUrl: {
     type: String,
@@ -12,13 +11,14 @@ const URLSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    default: shortId.generate(),
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  clicks: {
+    type: Number,
+    required: true,
+    default: 0,
   },
 });
 
-// Creating and exporting the URL model
-const URL = mongoose.model('URL', URLSchema);
+const URL = mongoose.model('ShortUrl', URLSchema);
 module.exports = URL;
