@@ -1,4 +1,4 @@
-/* App.css */
+/* Add this CSS in a separate file (e.g., styles.css) and import it in your component */
 
 body {
   font-family: 'Arial', sans-serif;
@@ -6,13 +6,14 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
 }
 
 .container {
-  text-align: center;
+  max-width: 800px;
+  width: 100%;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -25,12 +26,13 @@ h1 {
 
 label {
   display: block;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 input {
   width: 100%;
   padding: 8px;
+  margin-bottom: 10px;
   box-sizing: border-box;
 }
 
@@ -41,15 +43,31 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 4px;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #4caf50;
+  color: #fff;
+}
+
 a {
-  color: #3498db;
+  color: #0066cc;
   text-decoration: none;
 }
 
