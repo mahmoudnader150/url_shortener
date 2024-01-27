@@ -11,7 +11,7 @@ const URLSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    default: shortId.generate(),
+    default: shortId.generate,
   },
   clicks: {
     type: Number,
@@ -20,5 +20,5 @@ const URLSchema = new Schema({
   },
 });
 
-const URL = mongoose.model('ShortUrl', URLSchema);
-module.exports = URL;
+const ShortUrl = mongoose.model('ShortUrl', URLSchema);  // Use 'ShortUrl' as the model name
+module.exports = ShortUrl;  // Export the model

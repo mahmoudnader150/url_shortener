@@ -17,8 +17,10 @@ const UrlShortener = () => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log('Response from server:', data);
+
         setShortenedUrl(data.shortUrl.shortUrl);
-        // Fetch and update the table data after shortening
+        setOriginalUrl('');
         fetchAllUrls();
       } else {
         console.error('Failed to shorten URL');
@@ -43,7 +45,6 @@ const UrlShortener = () => {
   };
 
   useEffect(() => {
-    // Fetch initial data on component mount
     fetchAllUrls();
   }, []);
 
@@ -83,7 +84,11 @@ const UrlShortener = () => {
           {urlData.map(url => (
             <tr key={url._id}>
               <td>{url.originalUrl}</td>
-              <td>{url.shortUrl}</td>
+              <td>
+                <a href={url.originalUrl} target="_blank" rel="noopener noreferrer">
+                  {url.shortUrl}
+                </a>
+              </td>
             </tr>
           ))}
         </tbody>
