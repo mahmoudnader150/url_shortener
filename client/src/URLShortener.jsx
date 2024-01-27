@@ -7,24 +7,44 @@ const UrlShortener = () => {
 
   const handleShorten = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/shortURL/shorten', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ originalUrl }),
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Response from server:', data);
-
-        setShortenedUrl(data.shortUrl.shortUrl);
-        setOriginalUrl('');
+        let repeated = false;
+        
         fetchAllUrls();
-      } else {
-        console.error('Failed to shorten URL');
-      }
+        //If Original url submited before
+        urlData.forEach(element => {
+          if(element.originalUrl === originalUrl){
+            setShortenedUrl(element.shortUrl);
+            repeated = true;
+            return null;
+          }
+        });
+
+        if(repeated === false) {
+          const response = await fetch('http://localhost:8000/api/shortURL/shorten', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ originalUrl }),
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
+            console.log('Response from server:', data);
+            
+    
+        
+            setShortenedUrl(data.shortUrl.shortUrl);
+             
+            setOriginalUrl('');
+            fetchAllUrls();
+          } else {
+            console.error('Failed to shorten URL');
+          }
+        } 
+
+      
     } catch (error) {
       console.error('Error:', error);
     }

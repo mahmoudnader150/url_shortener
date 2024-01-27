@@ -10,7 +10,7 @@ router.post('/shorten', async (req, res) => {
     const existingShortUrl = await ShortUrl.findOne({ shortUrl: originalUrl });
 
     if (existingShortUrl) {
-      // Handle the case when the shortUrl already exists (generate a new one, etc.)
+    
       // For simplicity, let's append a random string to the original shortUrl
       const newShortUrl = originalUrl + '-' + Math.random().toString(36).substring(7);
 
